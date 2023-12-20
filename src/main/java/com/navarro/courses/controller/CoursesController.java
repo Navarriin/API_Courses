@@ -4,6 +4,7 @@ import com.navarro.courses.CoursesApplication;
 import com.navarro.courses.model.Course;
 import com.navarro.courses.repository.CourseRepository;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +21,13 @@ public class CoursesController {
     @GetMapping
     public List<Course> list(){
         return courseRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Course> getById(@PathVariable Long id) {
+        return courseRepository.findById(id)
+                .map(data -> ResponseEntity.ok().body(data))
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
