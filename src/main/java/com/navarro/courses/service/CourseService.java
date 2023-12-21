@@ -1,5 +1,6 @@
 package com.navarro.courses.service;
 
+import com.navarro.courses.exceptions.RecordNotFoundException;
 import com.navarro.courses.model.Course;
 import com.navarro.courses.repository.CourseRepository;
 import jakarta.validation.Valid;
@@ -9,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
-import java.util.Optional;
 
 @Validated
 @Service
@@ -24,28 +24,26 @@ public class CourseService {
         return courseRepository.findAll();
     }
 
-    public Optional<Course> getById(@NotNull @Positive Long id) {
-        return courseRepository.findById(id);
+    public Course getById(@NotNull @Positive Long id) {
+        return courseRepository.findById(id)
+                .orElseThrow(() -> new RecordNotFoundException(id));
     }
 
     public Course create(@Valid Course body) {
         return courseRepository.save(body);
     }
 
-    public Optional<Course> update( @NotNull @Positive Long id, @Valid Course body) {
+    public Course update( @NotNull @Positive Long id, @Valid Course body) {
         return courseRepository.findById(id)
                 .map(data -> {
                     data.setName(body.getName());
                     data.setCategory(body.getCategory());
                     return courseRepository.save(data);
-        });
+                }).orElseThrow(() -> new RecordNotFoundException(id));
     }
-    public boolean delete(@NotNull @Positive Long id){
-        return courseRepository.findById(id)
-                .map(data -> {
-                    courseRepository.deleteById(id);
-                    return true;
-                })
-                .orElse(false);
+    public void delete(@NotNull @Positive Long id){
+        courseRepository.delete(courseRepository.findById(id)
+                        .orElseThrow(() -> new RecordNotFoundException(id)));
+
     }
 }
