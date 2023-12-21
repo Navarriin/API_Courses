@@ -1,6 +1,6 @@
 package com.navarro.courses.controller;
 
-import com.navarro.courses.model.Course;
+import com.navarro.courses.dto.CourseDTO;
 import com.navarro.courses.service.CourseService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -22,24 +22,24 @@ public class CoursesController {
     }
 
     @GetMapping
-    public @ResponseBody List<Course> list(){
+    public @ResponseBody List<CourseDTO> list(){
         return courseService.list();
     }
 
     @GetMapping("/{id}")
-    public Course getById(@PathVariable @NotNull @Positive Long id) {
+    public CourseDTO getById(@PathVariable @NotNull @Positive Long id) {
         return courseService.getById(id);
     }
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Course create(@RequestBody @Valid Course body) {
+    public CourseDTO create(@RequestBody @Valid CourseDTO body) {
         return courseService.create(body);
     }
 
     @PutMapping("/{id}")
-    public Course update(
-            @PathVariable @NotNull @Positive Long id, @RequestBody @Valid Course body
+    public CourseDTO update(
+            @PathVariable @NotNull @Positive Long id, @RequestBody @Valid CourseDTO body
     ) {
         return courseService.update(id, body);
     }
