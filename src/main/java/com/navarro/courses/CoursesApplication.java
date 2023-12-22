@@ -1,5 +1,6 @@
 package com.navarro.courses;
 
+import com.navarro.courses.enums.Category;
 import com.navarro.courses.model.Course;
 import com.navarro.courses.repository.CourseRepository;
 import org.springframework.boot.CommandLineRunner;
@@ -21,7 +22,7 @@ public class CoursesApplication {
 
 				Course course = new Course();
 				course.setName("Angular");
-				course.setCategory("front-end");
+				course.setCategory(Category.FRONT_END);
 
 			courseRepository.save(course);
 		};

@@ -1,6 +1,10 @@
 package com.navarro.courses.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.navarro.courses.enums.Category;
+import com.navarro.courses.enums.Status;
+import com.navarro.courses.enums.converters.CategoryConverter;
+import com.navarro.courses.enums.converters.StatusConverter;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -28,12 +32,12 @@ public class Course {
     private String name;
 
     @NotNull
-    @Size(max = 15)
     @Column(length = 15, nullable = false)
-    private String category;
+    @Convert(converter = CategoryConverter.class)
+    private Category category;
 
     @NotNull
-    @Size(max = 10)
     @Column(length = 10, nullable = false)
-    private String status = "Ativo";
+    @Convert(converter = StatusConverter.class)
+    private Status status = Status.ACTIVE;
 }

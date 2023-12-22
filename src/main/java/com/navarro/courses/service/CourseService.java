@@ -41,11 +41,11 @@ public class CourseService {
         return courseMapper.toDTO(courseRepository.save(courseMapper.toEntity(body)));
     }
 
-    public CourseDTO update( @NotNull @Positive Long id, @Valid CourseDTO body) {
+    public CourseDTO update(@NotNull @Positive Long id, @Valid CourseDTO body) {
         return courseRepository.findById(id)
                 .map(data -> {
                     data.setName(body.name());
-                    data.setCategory(body.category());
+                    data.setCategory(courseMapper.convertCategoryValue(body.category()));
                     return courseMapper.toDTO(courseRepository.save(data));
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }
