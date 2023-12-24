@@ -22,14 +22,20 @@ public class CoursesApplication {
 			courseRepository.deleteAll();
 
 				Course course = new Course();
-				course.setName("Angular");
-				course.setCategory(Category.FRONT_END);
+				course.setName("Angular com Spring");
+				course.setCategory(Category.FULL_STACK);
 
 				Lesson lesson = new Lesson();
 				lesson.setName("Introdução");
 				lesson.setYoutubeUrl("https://www.youtube.com/watch?v=Nb4uxLxdvxo");
 				lesson.setCourse(course);
 				course.getLessons().add(lesson);
+
+                Lesson lesson1 = new Lesson();
+                lesson1.setName("Angular");
+                lesson1.setYoutubeUrl("https://www.youtube.com/watch?v=Nb4uxLxdvxo");
+                lesson1.setCourse(course);
+                course.getLessons().add(lesson1);
 
 
 			courseRepository.save(course);
