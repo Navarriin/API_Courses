@@ -27,13 +27,13 @@ public class CoursesApplication {
 
 				Lesson lesson = new Lesson();
 				lesson.setName("Introdução");
-				lesson.setYoutubeUrl("https://www.youtube.com/watch?v=Nb4uxLxdvxo");
+				lesson.setYoutubeUrl("watch?v=1");
 				lesson.setCourse(course);
 				course.getLessons().add(lesson);
 
                 Lesson lesson1 = new Lesson();
                 lesson1.setName("Angular");
-                lesson1.setYoutubeUrl("https://www.youtube.com/watch?v=Nb4uxLxdvxo");
+                lesson1.setYoutubeUrl("watch?v=2");
                 lesson1.setCourse(course);
                 course.getLessons().add(lesson1);
 

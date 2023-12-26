@@ -3,6 +3,7 @@ package com.navarro.courses.service;
 import com.navarro.courses.dto.CourseDTO;
 import com.navarro.courses.dto.mapper.CourseMapper;
 import com.navarro.courses.exceptions.RecordNotFoundException;
+import com.navarro.courses.model.Course;
 import com.navarro.courses.repository.CourseRepository;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -44,8 +45,12 @@ public class CourseService {
     public CourseDTO update(@NotNull @Positive Long id, @Valid CourseDTO body) {
         return courseRepository.findById(id)
                 .map(data -> {
+                    Course course = courseMapper.toEntity(body);
                     data.setName(body.name());
                     data.setCategory(courseMapper.convertCategoryValue(body.category()));
+                    data.getLessons().clear();
+                    course.getLessons().forEach(lesson ->
+                            data.getLessons().add(lesson));
                     return courseMapper.toDTO(courseRepository.save(data));
                 }).orElseThrow(() -> new RecordNotFoundException(id));
     }
