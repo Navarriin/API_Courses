@@ -14,7 +14,7 @@ import java.util.List;
 public record CourseDTO(
         @JsonProperty("_id") Long id,
         @NotNull @NotBlank @Size(max = 150) String name,
-        @NotNull @Size(max = 15) @ValueOfEnum(enumClass = Category.class) String category,
-        @NotNull @NotBlank @Valid List<LessonDTO> lesson
+        @NotNull @Size(max = 15) String category,
+        @NotNull @Valid List<LessonDTO> lesson
 ) {
 }
