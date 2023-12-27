@@ -1,16 +1,18 @@
 package com.navarro.courses.controller;
 
 import com.navarro.courses.dto.CourseDTO;
+import com.navarro.courses.dto.CoursePageDTO;
 import com.navarro.courses.service.CourseService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @Validated
 @RestController
 @RequestMapping("/api/courses")
@@ -22,8 +24,10 @@ public class CoursesController {
     }
 
     @GetMapping
-    public List<CourseDTO> list(){
-        return courseService.list();
+    public CoursePageDTO list(
+            @RequestParam(defaultValue = "0") @PositiveOrZero int pageNumber,
+            @RequestParam(defaultValue = "10") @Positive @Max(15) int pageSize){
+        return courseService.list(pageNumber, pageSize);
     }
 
     @GetMapping("/{id}")
@@ -50,3 +54,4 @@ public class CoursesController {
             courseService.delete(id);
     }
 }
+

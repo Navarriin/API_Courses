@@ -21,16 +21,16 @@ public class ApplicationControllerAdivice {
     @ResponseStatus(code = HttpStatus.NOT_FOUND)
     public String handleMethodArgumentNotValidException(MethodArgumentNotValidException err){
         return err.getBindingResult().getFieldErrors().stream()
-                .map(error -> error.getField() + "" + error.getDefaultMessage())
-                .reduce("",(acc, error) -> acc + error +"\n");
+                .map(error -> error.getField() + " " + error.getDefaultMessage())
+                .reduce(" ",(acc, error) -> acc + error +"\n");
     }
 
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(code = HttpStatus.NOT_FOUND)
     public String handleConstraintViolationException(ConstraintViolationException err){
         return err.getConstraintViolations().stream()
-                .map(error -> error.getPropertyPath() + "" + error.getMessage())
-                .reduce("",(acc, error) -> acc + error +"\n");
+                .map(error -> error.getPropertyPath() + " " + error.getMessage())
+                .reduce(" ",(acc, error) -> acc + error +"\n");
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)

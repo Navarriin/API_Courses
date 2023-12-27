@@ -1,8 +1,6 @@
 package com.navarro.courses.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.navarro.courses.enums.Category;
-import com.navarro.courses.enums.validation.ValueOfEnum;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
