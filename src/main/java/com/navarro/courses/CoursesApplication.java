@@ -24,7 +24,7 @@ public class CoursesApplication {
 				for(int i = 0; i < 20; i++) {
 
 					Course course = new Course();
-					course.setName("Angular com Spring" + i);
+					course.setName("Angular com Spring " + i);
 					course.setCategory(Category.FULL_STACK);
 
 					Lesson lesson = new Lesson();

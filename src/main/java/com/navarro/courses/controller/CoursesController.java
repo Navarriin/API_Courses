@@ -43,7 +43,8 @@ public class CoursesController {
 
     @PutMapping("/{id}")
     public CourseDTO update(
-            @PathVariable @NotNull @Positive Long id, @RequestBody @Valid CourseDTO body
+            @PathVariable @NotNull @Positive Long id,
+            @RequestBody @Valid CourseDTO body
     ) {
         return courseService.update(id, body);
     }
